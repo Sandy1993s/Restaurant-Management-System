@@ -1,0 +1,20 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: Restaurant-Management-System
+
+  datasource:
+    url: jdbc:postgresql://103.133.215.182:5432/gloitel_db_rms
+    username: gloitel
+    password: gloitel123
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
