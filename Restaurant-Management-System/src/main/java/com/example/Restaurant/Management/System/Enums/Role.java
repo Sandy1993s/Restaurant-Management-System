@@ -1,4 +1,7 @@
 package com.example.Restaurant.Management.System.Enums;
 
-public enum UserType {
+public enum Role {
+
+  ADMIN, WAITER, CHEF, CUSTOMER
+
 }
