@@ -1,4 +1,4 @@
-package com.example.Restaurant.Management.System.Repositorey;
+package com.example.Restaurant.Management.System.Repository;
 
 import java.util.Optional;
 
