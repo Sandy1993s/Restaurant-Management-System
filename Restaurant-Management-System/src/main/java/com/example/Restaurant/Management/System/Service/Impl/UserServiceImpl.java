@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.Restaurant.Management.System.Dto.Request.UserRequest;
 import com.example.Restaurant.Management.System.Model.Users;
-import com.example.Restaurant.Management.System.Repositorey.UserRepository;
+import com.example.Restaurant.Management.System.Repository.UserRepository;
 import com.example.Restaurant.Management.System.Service.Interface.UserService;
 
 @Service
