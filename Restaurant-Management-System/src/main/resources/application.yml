@@ -18,3 +18,9 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+jwt:
+  # secret: asxhsys-hdshghdhjd-hgdshdikeudgbck-agdsfeyj-bdgdhsjkslk--hshdjsdo-jfdkfirhy
+  secret: asxhsys-hdshghdhjd-hgdshdikeudgbck-agdsfeyj-bdgdhsjkslk--hshdjsdo-jfdkfirhy
+  access-token-validity: 43200000 # 12 hours in milliseconds
+  refresh-token-validity: 604800000 # 7 days in milliseconds

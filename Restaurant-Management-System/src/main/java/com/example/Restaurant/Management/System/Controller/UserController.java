@@ -1,5 +1,6 @@
 package com.example.Restaurant.Management.System.Controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +39,14 @@ public class UserController {
   }
 
   @GetMapping("/all")
-  ResponseEntity<String> getAllUsers() {
+  ResponseEntity getAllUsers() {
     List<Users> users = userService.getAllUsers();
-    return ResponseEntity.ok("All Users Get Successfully" + users);
+    HashMap<String, Object> response = new HashMap<>();
+    response.put("data", users);
+    response.put("status", "success");
+    response.put("statusCode", 200);
+    response.put("message", "All Users Get Successfully");
+    return ResponseEntity.ok(response);
 
   }
 
