@@ -3,7 +3,7 @@ package com.example.Restaurant.Management.System.Service.Impl;
 import com.example.Restaurant.Management.System.Dto.Request.TableRequest;
 import com.example.Restaurant.Management.System.Dto.Response.TableResponse;
 import com.example.Restaurant.Management.System.Mapper.TableMapper;
-import com.example.Restaurant.Management.System.Model.Table;
+import com.example.Restaurant.Management.System.Model.MasTable;
 import com.example.Restaurant.Management.System.Repository.TableRepository;
 import com.example.Restaurant.Management.System.Service.Interface.TableService;
 import lombok.RequiredArgsConstructor;
@@ -18,23 +18,24 @@ import java.util.stream.Collectors;
 public class TableServiceImpl implements TableService {
 @Autowired
     private TableRepository tableRepository;
+@Autowired
     private TableMapper tableMapper;
+
 
     @Override
     public TableResponse createTable(TableRequest tableRequest) {
-        Optional<Table> data = tableRepository.findByTableNumber(tableRequest.getTableNumber());
+        Optional<MasTable> data = tableRepository.findByTableNumber(tableRequest.getTableNumber());
         if (data.isPresent()) {
             throw new RuntimeException("Table number already exists");
         }
-
-        Table table = tableMapper.toEntity(tableRequest);
-        Table savedTable = tableRepository.save(table);
+        MasTable table = tableMapper.toEntity(tableRequest);
+        MasTable savedTable = tableRepository.save(table);
         return tableMapper.toDTO(savedTable);
     }
 
     @Override
     public TableResponse getTableById(Long id) {
-        Table table = tableRepository.findById(id)
+        MasTable table = tableRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Table not found with id: " + id));
         return tableMapper.toDTO(table);
     }
@@ -48,28 +49,28 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public TableResponse updateTable(Long id, TableRequest tableRequestDTO) {
-        Table existingTable = tableRepository.findById(id)
+        MasTable existingTable = tableRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Table not found with id: " + id));
 
         existingTable.setTableNumber(tableRequestDTO.getTableNumber());
         existingTable.setSeats(tableRequestDTO.getSeats());
-        Table updatedTable = tableRepository.save(existingTable);
+        MasTable updatedTable = tableRepository.save(existingTable);
         return tableMapper.toDTO(updatedTable);
     }
 
     @Override
     public void deleteTable(Long id) {
-        Table table = tableRepository.findById(id)
+        MasTable table = tableRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Table not found with id: " + id));
         tableRepository.delete(table);
     }
 
     @Override
     public TableResponse updateOccupiedStatus(Long id, boolean isOccupied) {
-        Table table = tableRepository.findById(id)
+        MasTable table = tableRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Table not found with id: " + id));
         table.setOccupied(isOccupied);
-        Table updatedTable = tableRepository.save(table);
+        MasTable updatedTable = tableRepository.save(table);
         return tableMapper.toDTO(updatedTable);
     }
 
