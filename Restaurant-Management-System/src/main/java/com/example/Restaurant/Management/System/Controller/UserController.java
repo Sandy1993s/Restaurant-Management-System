@@ -1,8 +1,10 @@
 package com.example.Restaurant.Management.System.Controller;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.HashMap;
 
+import com.example.Restaurant.Management.System.Dto.Response.ApiResponse;
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,39 +29,34 @@ public class UserController {
   private UserService userService;
 
   @PostMapping("/register")
-  ResponseEntity<String> registerUser(@RequestBody UserRequest request) {
+  ResponseEntity registerUser(@RequestBody UserRequest request) {
     Users user = userService.createUser(request);
-    return ResponseEntity.ok("User Registered Successfully" + user);
+    return ResponseEntity.ok(new ApiResponse<>(user, "success", 200, "User Registered Successfully"));
   }
 
   @GetMapping("/{id}")
-  ResponseEntity<String> getUserById(@PathVariable Long id) {
+  ResponseEntity getUserById(@PathVariable Long id) {
     Users user = userService.getUserById(id);
-    return ResponseEntity.ok("User Get Successfully" + user);
+    return ResponseEntity.ok(new ApiResponse<>(user, "success", 200, "User Get Successfully"));
   }
 
   @GetMapping("/all")
-  ResponseEntity getAllUsers() {
-    List<Users> users = userService.getAllUsers();
-    HashMap<String, Object> response = new HashMap<>();
-    response.put("data", users);
-    response.put("status", "success");
-    response.put("statusCode", 200);
-    response.put("message", "All Users Get Successfully");
-    return ResponseEntity.ok(response);
+  ResponseEntity getAllUsers(Pageable pageable) {
+    List<Users> users = userService.getAllUsers(pageable);
+    return ResponseEntity.ok(new ApiResponse<>(users, "success", 200, "All Users Get Successfully"));
 
   }
 
   @PutMapping("/{id}")
-  ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody UserRequest request) {
+  ResponseEntity updateUser(@PathVariable Long id, @RequestBody UserRequest request) {
     Users user = userService.updateUser(id, request);
-    return ResponseEntity.ok("User Updated Successfully" + user);
+    return ResponseEntity.ok(new ApiResponse<>(user, "success", 200, "User Updated Successfully"));
   }
 
   @DeleteMapping("/{id}")
-  ResponseEntity<String> deleteUser(@PathVariable Long id) {
+  ResponseEntity deleteUser(@PathVariable Long id) {
     userService.delateUserById(id);
-    return ResponseEntity.ok("User Deleted Successfully");
+    return ResponseEntity.ok(new ApiResponse<>(null, "success", 200, "User Deleted Successfully"));
   }
 
 }

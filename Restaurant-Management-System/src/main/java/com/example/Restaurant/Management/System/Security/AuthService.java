@@ -68,6 +68,7 @@ public class AuthService {
         .accessToken(accessToken)
         .refreshToken(refreshToken)
         .username(user.getUsername())
+        .role(user.getRole())
         .accessTokenExpiry(jwtService.getAccessTokenValidity())
         .refreshTokenExpiry(jwtService.getRefreshTokenValidity())
         .build();
