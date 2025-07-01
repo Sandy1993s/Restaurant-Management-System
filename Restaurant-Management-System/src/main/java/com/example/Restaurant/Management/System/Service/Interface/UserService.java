@@ -1,6 +1,7 @@
 package com.example.Restaurant.Management.System.Service.Interface;
 
-import java.util.List;
+import java.util.List;  
+import org.springframework.data.domain.Pageable;
 
 import org.springframework.stereotype.Service;
 
@@ -18,5 +19,5 @@ public interface UserService {
 
   void delateUserById(Long id);
 
-  List<Users> getAllUsers();
+  List<Users> getAllUsers(Pageable pageable);
 }
