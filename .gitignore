@@ -23,6 +23,18 @@
 # misc
 .DS_Store
 *.pem
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar
+*.gz
+*.log
+*.log.*
+*.log.*.*
+*.log.*.*.*
+*.log.*.*.*.*
 
 # debug
 npm-debug.log*
