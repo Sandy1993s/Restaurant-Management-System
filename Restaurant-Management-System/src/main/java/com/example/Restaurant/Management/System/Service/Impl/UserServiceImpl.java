@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
 import com.example.Restaurant.Management.System.Dto.Request.UserRequest;
 import com.example.Restaurant.Management.System.Model.Users;
@@ -65,8 +66,8 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public List<Users> getAllUsers() {
-    return userRepository.findAll();
+  public List<Users> getAllUsers(Pageable pageable) {
+    return userRepository.findAll(pageable).getContent();
   }
 
 }
