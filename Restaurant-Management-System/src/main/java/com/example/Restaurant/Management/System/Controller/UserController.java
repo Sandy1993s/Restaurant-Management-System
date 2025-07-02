@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,8 +40,8 @@ public class UserController {
   }
 
   @GetMapping("/all")
-  ResponseEntity getAllUsers() {
-    List<Users> users = userService.getAllUsers();
+  ResponseEntity getAllUsers(Pageable pageable) {
+    List<Users> users = userService.getAllUsers(pageable);
     HashMap<String, Object> response = new HashMap<>();
     response.put("data", users);
     response.put("status", "success");
@@ -63,3 +64,4 @@ public class UserController {
   }
 
 }
+
